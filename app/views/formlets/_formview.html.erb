@@ -519,8 +519,9 @@ select.form-element-field {
         <%= form.label :grounds, 'Hva er din leders begrunnelse for hvorfor du bør bli valgt ut til å delta i tenketanken?', :class => 'form-element-label' %>
       </div>
 
-
-
+      <div>
+        <%= link_to 'Last ned CV', formlet.document.url, :title => formlet.document , :target => 'blank' %>
+      </div>
  
     </fieldset>
 
