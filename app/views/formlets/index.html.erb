@@ -1,0 +1,37 @@
+<div class="ibox">
+  <div class="ibox-title"><h2><i class="fa fa-id-card"></i> Søknader</h2></div>
+  <div class="ibox-content">
+    <div class="panel-body">  
+      <p id="notice"><%= notice %></p>
+
+
+      <table class="table table-bordered table-hover" >
+        <thead>
+          <tr>
+            <th>Navn</th>
+            <th>Bedrift</th>
+            <th colspan="2">Slette</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @formlets.each do |formlet| %>
+            <tr>
+              <td><%= link_to formlet.name, edit_formlet_path(formlet) %></td>
+
+              <td><%= formlet.company %></td>
+              
+
+              <td><%= link_to 'Slette', formlet_url(formlet), :class => 'btn btn-danger btn-xs', method: :delete, data: { confirm: 'Er du sikker på at du vil slette?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+
+      <%= link_to 'Ny søknad', new_formlet_path, :class => 'btn btn-primary' %>
+  
+    </div>
+  </div>
+</div>

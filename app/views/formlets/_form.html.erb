@@ -1,0 +1,575 @@
+<style>
+.form-btn,
+.form-btn-cancel,
+.form-btn-error {
+  background: transparent;
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 5px 24px;
+  margin-top: 2.25rem;
+  position: relative;
+  z-index: 0;
+  transition: -webkit-transform 0.28s ease;
+  transition: transform 0.28s ease;
+  transition: transform 0.28s ease, -webkit-transform 0.28s ease;
+  will-change: transform;
+}
+
+.form-btn::before,
+.form-btn::after,
+.form-btn-cancel::before,
+.form-btn-cancel::after,
+.form-btn-error::before,
+.form-btn-error::after {
+  position: absolute;
+  content: "";
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+}
+
+.form-btn::before,
+.form-btn-cancel::before,
+.form-btn-error::before {
+  background: #337ab7;
+  z-index: -2;
+}
+
+.form-btn::after,
+.form-btn-cancel::after,
+.form-btn-error::after {
+  background: #000;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  will-change: opacity;
+}
+
+.form-btn:focus,
+.form-btn-cancel:focus,
+.form-btn-error:focus {
+  outline: none;
+}
+
+.form-btn:focus::after,
+.form-btn:hover::after,
+.form-btn-cancel:focus::after,
+.form-btn-cancel:hover::after,
+.form-btn-error:focus::after,
+.form-btn-error:hover::after {
+  opacity: 0.3;
+}
+
+.form-btn:active,
+.form-btn-cancel:active,
+.form-btn-error:active {
+  -webkit-transform: translateY(1px);
+          transform: translateY(1px);
+}
+
+.form-btn-error::before {
+  background: #d9534f;
+}
+
+.form-btn-cancel {
+  transition: color 0.28s ease, -webkit-transform 0.28s ease;
+  transition: color 0.28s ease, transform 0.28s ease;
+  transition: color 0.28s ease, transform 0.28s ease, -webkit-transform 0.28s ease;
+  color: #b52b27;
+  border-color: currentColor;
+  will-change: color, transform;
+}
+
+.form-btn-cancel.-nooutline {
+  border-color: transparent;
+}
+
+.form-btn-cancel::before {
+  background: #b52b27;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  will-change: opacity;
+}
+
+.form-btn-cancel::after {
+  display: none;
+}
+
+.form-btn-cancel:focus,
+.form-btn-cancel:hover {
+  color: #fff;
+}
+
+.form-btn-cancel:focus::before,
+.form-btn-cancel:hover::before {
+  opacity: 1;
+}
+
+.form-btn-block {
+  display: block;
+  width: 100%;
+  padding: 5px;
+}
+
+
+.form-card {
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.56s cubic-bezier(0.25, 0.8, 0.25, 1);
+  max-width: 800px;
+  padding: 0;
+  margin: 50px auto;
+}
+
+.form-card:hover,
+.form-card:focus {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.form-card:focus-within {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.form-actions {
+  position: relative;
+  display: flex;
+  margin-top: 2.25rem;
+}
+
+.form-actions .form-btn-cancel {
+  order: -1;
+}
+
+.form-actions::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: #999;
+  opacity: 0.3;
+}
+
+.form-actions > * {
+  flex: 1;
+  margin-top: 0;
+}
+
+.form-fieldset {
+  padding: 80px;
+  border: 0;
+}
+
+.form-fieldset + .form-fieldset {
+  margin-top: 15px;
+}
+
+.form-legend {
+  padding: 1em 0 0;
+  margin: 0 0 -0.5em;
+  font-size: 20px;
+  line-height: 135%;
+  text-align: center;
+}
+
+.form-legend + p {
+  margin-top: 1rem;
+}
+
+.form-element {
+  position: relative;
+  margin-top: 2.25rem;
+  margin-bottom: 5.25rem;
+}
+
+.form-element-hint {
+  font-weight: 400;
+  font-size: 0.6875rem;
+  color: #a6a6a6;
+  display: block;
+}
+
+.form-element-bar {
+  position: relative;
+  height: 1px;
+  background: #999;
+  display: block;
+}
+
+.form-element-bar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #337ab7;
+  height: 2px;
+  display: block;
+  -webkit-transform: rotateY(90deg);
+          transform: rotateY(90deg);
+  transition: -webkit-transform 0.28s ease;
+  transition: transform 0.28s ease;
+  transition: transform 0.28s ease, -webkit-transform 0.28s ease;
+  will-change: transform;
+}
+
+.form-element-label {
+  position: absolute;
+  top: 0.75rem;
+  line-height: 1.5rem;
+  pointer-events: none;
+  padding-left: 0.125rem;
+  z-index: 1;
+  font-size: 1rem;
+  font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  color: #000;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transform-origin: left center;
+          transform-origin: left center;
+  transition: color 0.28s linear, opacity 0.28s linear, -webkit-transform 0.28s ease;
+  transition: transform 0.28s ease, color 0.28s linear, opacity 0.28s linear;
+  transition: transform 0.28s ease, color 0.28s linear, opacity 0.28s linear, -webkit-transform 0.28s ease;
+  will-change: transform, color, opacity;
+}
+
+.form-element-field {
+  outline: none;
+  height: 1.5rem;
+  display: block;
+  background: none;
+  padding: 0.125rem 0.125rem 0.0625rem;
+  font-size: 1rem;
+  border: 0 solid transparent;
+  line-height: 1.5;
+  width: 100%;
+  color: #000;
+  box-shadow: none;
+  opacity: 0.001;
+  transition: opacity 0.28s ease;
+  will-change: opacity;
+}
+
+.form-element-field:-ms-input-placeholder {
+  color: #a6a6a6;
+  transform: scale(0.9);
+  transform-origin: left top;
+}
+
+.form-element-field::-webkit-input-placeholder {
+  color: #a6a6a6;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  -webkit-transform-origin: left top;
+          transform-origin: left top;
+}
+
+.form-element-field::-ms-input-placeholder {
+  color: #a6a6a6;
+  transform: scale(0.9);
+  transform-origin: left top;
+}
+
+.form-element-field::placeholder {
+  color: #a6a6a6;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  -webkit-transform-origin: left top;
+          transform-origin: left top;
+}
+
+.form-element-field:focus ~ .form-element-bar::after {
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+}
+
+.form-element-field:focus ~ .form-element-label {
+  color: #337ab7;
+}
+
+
+.file-field {
+    position: relative;
+}
+
+.file-field input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    color:#000000;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.file-field .file-path-wrapper {
+    overflow: hidden;
+    padding-left: 10px;
+    color:#000000;
+}
+
+.file-field input.file-path {
+    width: 100%;
+    color:#000000;
+}
+
+.file-field .btn, .file-field .btn-large {
+    float: left;
+    height: 3rem;
+    line-height: 3rem;
+}
+
+.btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: #ff4081;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: 0.2s ease-out;
+    -moz-transition: 0.2s ease-out;
+    -o-transition: 0.2s ease-out;
+    -ms-transition: 0.2s ease-out;
+    transition: 0.2s ease-out;
+    cursor: pointer;
+}
+
+.btn, .btn-large, .btn-flat {
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    outline: 0;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+}
+
+input[type=text].valid, input[type=text]:focus.valid, input[type=password].valid, input[type=password]:focus.valid, input[type=email].valid, input[type=email]:focus.valid, input[type=url].valid, input[type=url]:focus.valid, input[type=time].valid, input[type=time]:focus.valid, input[type=date].valid, input[type=date]:focus.valid, input[type=datetime-local].valid, input[type=datetime-local]:focus.valid, input[type=tel].valid, input[type=tel]:focus.valid, input[type=number].valid, input[type=number]:focus.valid, input[type=search].valid, input[type=search]:focus.valid, textarea.materialize-textarea.valid, textarea.materialize-textarea:focus.valid {
+    border-bottom: 1px solid #00E676;
+    box-shadow: 0 1px 0 0 #00E676;
+}
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #9e9e9e;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 1rem;
+    margin: 0 0 15px 0;
+    padding: 0;
+    box-shadow: none;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    transition: all .3s;
+}
+input {
+    line-height: normal;
+    color:#000000;
+}
+
+
+.form-element-field.-hasvalue,
+.form-element-field:focus {
+  opacity: 1;
+}
+
+.form-element-field.-hasvalue ~ .form-element-label,
+.form-element-field:focus ~ .form-element-label {
+  -webkit-transform: translateY(-100%) translateY(-0.5em) translateY(-2px) scale(0.9);
+          transform: translateY(-100%) translateY(-0.5em) translateY(-2px) scale(0.9);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.form-has-error .form-element-label.form-element-label,
+.form-has-error .form-element-hint {
+  color: #d9534f;
+}
+
+.form-has-error .form-element-bar,
+.form-has-error .form-element-bar::after {
+  background: #d9534f;
+}
+
+.form-is-success .form-element-label.form-element-label,
+.form-is-success .form-element-hint {
+  color: #259337;
+}
+
+.form-is-success .form-element-bar::after {
+  background: #259337;
+}
+
+input.form-element-field:not(:placeholder-shown),
+textarea.form-element-field:not(:placeholder-shown) {
+  opacity: 1;
+}
+
+input.form-element-field:not(:placeholder-shown) ~ .form-element-label,
+textarea.form-element-field:not(:placeholder-shown) ~ .form-element-label {
+  -webkit-transform: translateY(-100%) translateY(-0.5em) translateY(-2px) scale(0.9);
+          transform: translateY(-100%) translateY(-0.5em) translateY(-2px) scale(0.9);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+textarea.form-element-field {
+  height: auto;
+  min-height: 3rem;
+}
+
+select.form-element-field {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.form-select-placeholder {
+  color: #a6a6a6;
+  display: none;
+}
+
+.form-select .form-element-bar::before {
+  content: "";
+  position: absolute;
+  height: 0.5em;
+  width: 0.5em;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
+  display: block;
+  right: 0.5em;
+  bottom: 0;
+  transition: -webkit-transform 0.28s ease;
+  transition: transform 0.28s ease;
+  transition: transform 0.28s ease, -webkit-transform 0.28s ease;
+  -webkit-transform: translateY(-100%) rotateX(0deg) rotate(45deg);
+          transform: translateY(-100%) rotateX(0deg) rotate(45deg);
+  will-change: transform;
+}
+
+.form-select select:focus ~ .form-element-bar::before {
+  -webkit-transform: translateY(-50%) rotateX(180deg) rotate(45deg);
+          transform: translateY(-50%) rotateX(180deg) rotate(45deg);
+}
+
+.form-element-field[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.form-element-field[type="number"]::-webkit-outer-spin-button,
+.form-element-field[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+</style>
+<div style="width:100%;text-align:center;">
+  <%= image_tag('ikuben-logo.png') %>
+</div>
+
+  <%= form_for [ @formlet ], html: { multipart: true, :class => 'form-card' } do |form| %>
+    <% if @formlet.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@formlet.errors.count, "error") %> prohibited this form from being saved:</h2>
+
+        <ul>
+        <% @formlet.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset class="form-fieldset">
+
+      <legend class="form-legend">Søknadskjema NCE iKubens tenketank<br>
+        <small>Søknadsfrist 14.desember 2018</small>
+      </legend>
+
+      <div class="form-element form-input">   
+        <%= form.label :name, 'Ditt navn' %> 
+        <div class="form-element-bar"></div> 
+        <%= form.text_field :name, id: :formlet_name, :class => 'form-element-field', :placeholder => "Kort svartekst" %>
+      </div>
+
+      <div class="form-element form-input">
+        <%= form.label :email, 'E-postadresse' %>
+        <%= form.text_field :email, id: :formlet_email, :class => 'form-element-field', :placeholder => "Kort svartekst" %>
+      </div>
+
+      <div class="form-element form-input">
+        <%= form.label :company, 'Bedrift' %>
+        <%= form.text_field :company, id: :formlet_company, :class => 'form-element-field', :placeholder => "Kort svartekst" %>
+      </div>          
+ 
+      <div class="form-element form-input">
+        <%= form.label :position, 'Nåværende stilling' %>
+        <%= form.text_field :position, id: :formlet_position, :class => 'form-element-field', :placeholder => "Kort svartekst" %>
+      </div>
+
+      <div class="form-element form-input">
+        <%= form.label :duration, 'Hvor lenge har du hatt stillingen?' %>
+        <%= form.text_field :duration, id: :formlet_duration, :class => 'form-element-field', :placeholder => "Kort svartekst" %>
+      </div>
+
+      <div class="form-element form-input">
+        <%= form.label :challenge, 'Hvilke utfordringer, globale eller nasjonale, ser du din bedrift vil møte i årene fremover?' %>
+        <%= form.text_area :challenge, id: :formlets_challenge, :class => 'form-element-field', :placeholder => "Kort svartekst" %>
+      </div>
+
+      <div class="form-element form-input">
+        <%= form.label :motivation, 'Hva motiverer deg til å delta i tenketanken?' %>
+        <%= form.text_area :motivation, id: :formlets_motivation, :class => 'form-element-field', :placeholder => "Kort svartekst" %>
+      </div>
+
+      <div class="form-element form-input">
+        <%= form.label :grounds, 'Hva er din leders begrunnelse for hvorfor du bør bli valgt ut til å delta i tenketanken?' %>
+        <%= form.text_area :grounds, id: :formlets_grounds,:class => 'form-element-field', :placeholder => "Kort svartekst" %>
+      </div>
+
+
+      <div class="form-element file-field input-field">
+        <%= form.label :document, :class => "btn btn-info btn-sm btn-block" do %>
+          <%= form.file_field :document, :class => 'hide'%>Last opp CV
+        <% end %>
+      </div>          
+ 
+    </fieldset>
+
+    <div class="form-actions">
+      <%= form.submit 'Send inn søknad', :class => 'form-btn' %>
+      <%= button_tag 'Avbryt', type: :reset, :class => 'form-btn-cancel -nooutline' %>
+    </div>
+
+ 
+<% end %>
+
+<script>
+  document.addEventListener("change", function(event) {
+    let element = event.target;
+    if (element && element.matches(".form-element-field")) {
+      element.classList[element.value ? "add" : "remove"]("-hasvalue");
+    }
+  });
+
+</script>

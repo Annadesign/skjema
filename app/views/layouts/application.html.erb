@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ikuben</title>
+    <%= csrf_meta_tags %>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap-reboot.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>	
+	<style type="text/css">
+		body {
+		  	font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+		    margin: 40px auto;
+  			background-color: rgb(237, 238, 239);
+		}
+		.background {
+		  	position: fixed;
+		  	z-index: -1;
+		  	top: 0;
+		  	left: 0;
+		  	right: 0;
+		  	bottom: 0;
+		  	-o-object-fit: cover;
+		     object-fit: cover;
+		  	height: 100%;
+		  	width: 100%;
+		}
+	</style>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
