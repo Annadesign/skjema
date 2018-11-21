@@ -1,16 +1,66 @@
-<div class="ibox">
-  <div class="ibox-title"><h2><i class="fa fa-id-card"></i> Søknader</h2></div>
-  <div class="ibox-content">
-    <div class="panel-body">  
-      <p id="notice"><%= notice %></p>
+<style type="text/css">
+.form-card {
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.56s cubic-bezier(0.25, 0.8, 0.25, 1);
+  max-width: 800px;
+  padding: 0;
+  margin: 50px auto;
+}
 
+.form-card:hover,
+.form-card:focus {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
 
-      <table class="table table-bordered table-hover" >
+.form-card:focus-within {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+} 
+.form-fieldset {
+  padding: 80px;
+  border: 0;
+}
+
+.form-fieldset + .form-fieldset {
+  margin-top: 15px;
+}
+
+.form-legend {
+  padding: 1em 0 0;
+  margin: 0 0 -0.5em;
+  font-size: 20px;
+  line-height: 135%;
+  text-align: center;
+}
+
+.form-legend + p {
+  margin-top: 1rem;
+}
+
+tr {
+  border-bottom: 1px solid #333;
+}
+</style>
+<div style="width:100%;text-align:center;">
+  <%= image_tag('ikuben-logo.png') %>
+</div>
+<div class="form-card">
+<fieldset class="form-fieldset">
+
+  <legend class="form-legend">Søknader til NCE iKubens tenketank<br>
+   
+  </legend>
+
+      <table style="padding:5px;margin:5px;" >
         <thead>
           <tr>
             <th>Navn</th>
+            <th>Epost</th>
             <th>Bedrift</th>
-            <th colspan="2">Slette</th>
+            <th>Levert</th>
+            <th>Last ned</th>
+            <th>Slette</th>
           </tr>
         </thead>
 
@@ -19,8 +69,13 @@
             <tr>
               <td><%= link_to formlet.name, edit_formlet_path(formlet) %></td>
 
+              <td><%= formlet.email %></td>
+
               <td><%= formlet.company %></td>
-              
+
+              <td><%= formlet.created_at.to_s(:long) %></td>
+
+              <td><%= link_to 'Last ned CV', formlet.document.url, :title => formlet.document , :target => 'blank' %></td>
 
               <td><%= link_to 'Slette', formlet_url(formlet), :class => 'btn btn-danger btn-xs', method: :delete, data: { confirm: 'Er du sikker på at du vil slette?' } %></td>
             </tr>
@@ -28,10 +83,7 @@
         </tbody>
       </table>
 
-      <br>
-
-      <%= link_to 'Ny søknad', new_formlet_path, :class => 'btn btn-primary' %>
-  
-    </div>
+    </fieldset>
   </div>
-</div>
+
+

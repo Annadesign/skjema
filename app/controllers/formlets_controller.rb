@@ -20,7 +20,7 @@ class FormletsController < ApplicationController
 
     respond_to do |format|
       if @formlet.save
-        format.html { redirect_to formlets_path, notice: 'Søknad er lagret.' }
+        format.html { redirect_to formlet_path(@formlet), notice: 'Takk for din søknad.' }
       else
         format.html { render :new }
       end
