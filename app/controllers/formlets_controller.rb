@@ -10,6 +10,9 @@ class FormletsController < ApplicationController
   end
 
   def show
+    unless current_moderator
+        redirect_to login_url
+    end    
   end
 
   def new
