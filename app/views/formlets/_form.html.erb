@@ -501,6 +501,12 @@ select.form-element-field {
         <%= form.label :duration, 'Hvor lenge har du hatt stillingen?', :class => 'form-element-label' %>
       </div>
 
+      <div class="form-element form-textarea">
+        <%= form.text_area :education, id: :formlets_education, :class => 'form-element-field', :placeholder => "Lang svartekst" %>
+        <div class="form-element-bar"></div> 
+        <%= form.label :education, 'Hvilke utdanning har du?', :class => 'form-element-label' %>
+      </div>            
+
       <div class="form-element form-input">
         <%= form.text_area :challenge, id: :formlets_challenge, :class => 'form-element-field', :placeholder => "Lang svartekst" %>
         <div class="form-element-bar"></div> 

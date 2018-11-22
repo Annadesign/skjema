@@ -470,7 +470,7 @@ select.form-element-field {
       <legend class="form-legend">Søknadskjema NCE iKubens tenketank<br>
         <small>Søknadsfrist 14.desember 2018</small>
       </legend>
-
+       <div><%= link_to 'Tilbake til oversikt', formlets_path %></div>
       <div class="form-element form-input">   
         <%= form.text_field :name, id: :formlet_name, :class => 'form-element-field', :placeholder => "Kort svartekst" %>
         <div class="form-element-bar"></div> 
@@ -502,6 +502,12 @@ select.form-element-field {
       </div>
 
       <div class="form-element form-textarea">
+        <%= form.text_area :education, id: :formlets_education, :class => 'form-element-field', :placeholder => "Lang svartekst" %>
+        <div class="form-element-bar"></div> 
+        <%= form.label :education, 'Hvilke utdanning har du?', :class => 'form-element-label' %>
+      </div>      
+
+      <div class="form-element form-textarea">
         <%= form.text_area :challenge, id: :formlets_challenge, :class => 'form-element-field', :placeholder => "Lang svartekst" %>
         <div class="form-element-bar"></div> 
         <%= form.label :challenge, 'Hvilke utfordringer, globale eller nasjonale, ser du din bedrift vil møte i årene fremover?', :class => 'form-element-label' %>
@@ -522,7 +528,7 @@ select.form-element-field {
       <div>
         <%= link_to 'Last ned CV', formlet.document.url, :title => formlet.document , :target => 'blank' %>
       </div>
- 
+      <div><%= link_to 'Tilbake til oversikt', formlets_path %></div>
     </fieldset>
 
 

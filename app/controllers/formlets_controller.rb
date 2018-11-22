@@ -2,7 +2,11 @@ class FormletsController < ApplicationController
   before_action :set_formlet, only: [:show, :edit, :update, :destroy]
 
   def index
-    @formlets = Formlet.all
+    unless current_moderator
+      redirect_to login_url
+    else
+      @formlets = Formlet.all
+    end
   end
 
   def show
@@ -13,6 +17,9 @@ class FormletsController < ApplicationController
   end
 
   def edit
+    unless current_moderator
+        redirect_to login_url
+    end
   end
 
   def create
