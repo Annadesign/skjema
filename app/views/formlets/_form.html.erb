@@ -453,24 +453,23 @@ select.form-element-field {
 </div>
 
   <%= form_for [ @formlet ], html: { multipart: true, :class => 'form-card' } do |form| %>
-    <% if @formlet.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@formlet.errors.count, "error") %> prohibited this form from being saved:</h2>
-
-        <ul>
-        <% @formlet.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
 
     <fieldset class="form-fieldset">
 
       <legend class="form-legend">Søknadskjema NCE iKubens tenketank<br>
         <small>Søknadsfrist 14.desember 2018</small>
       </legend>
+      <% if @formlet.errors.any? %>
+        <div id="error_explanation" style="color:red;">
+          <h2><%= pluralize(@formlet.errors.count, "error") %> prohibited this form from being saved:</h2>
 
+          <ul>
+          <% @formlet.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div class="form-element form-input">   
         <%= form.text_field :name, id: :formlet_name, :class => 'form-element-field', :placeholder => "Kort svartekst" %>
         <div class="form-element-bar"></div> 
